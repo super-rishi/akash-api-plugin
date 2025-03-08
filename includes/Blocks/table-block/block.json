@@ -1,0 +1,43 @@
+{
+    "apiVersion": 3,
+    "name": "akash-api-plugin/table-block",
+    "title": "Akash API Plugin Table Block",
+    "description": "A table block that fetches and displays API data.",
+    "category": "widgets",
+    "icon": "editor-table",
+    "keywords": [
+        "api",
+        "table",
+        "data",
+        "akash"
+    ],
+    "supports": {
+        "html": false,
+        "multiple": true,
+        "reusable": true
+    },
+    "attributes": {
+        "content": {
+            "type": "string",
+            "default": "Loading Table Data..."
+        },
+        "previewImage": "",
+        "showName": {
+            "type": "boolean",
+            "default": true
+        },
+        "showEmail": {
+            "type": "boolean",
+            "default": true
+        },
+        "showPhone": {
+            "type": "boolean",
+            "default": true
+        }
+    },
+    "example": {
+        "attributes": {
+            "previewImage": "Screenshot.png"
+        }
+    }
+}

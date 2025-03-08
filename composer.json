@@ -1,0 +1,13 @@
+{
+    "name": "akash/api-plugin",
+    "description": "A simple plugin that retrieves data from a remote API endpoint, and makes that data accessible/retrievable from an API endpoint on the WordPress site your plugin is installed on. The data will be displayed via a custom block and on an admin WordPress page.",
+    "type": "wordpress-plugin",
+    "autoload": {
+        "psr-4": {
+            "Akash\\ApiPlugin\\": "includes/"
+        }
+    },
+    "require": {
+        "php": ">=7.4"
+    }
+}

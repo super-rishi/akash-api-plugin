@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: Akash API Plugin
  * Plugin URI: https://github.com/super-rishi/akash-api-plugin
@@ -10,10 +11,26 @@
  * Author URI: #
  * License: GPLv2 or later
  * Text Domain: akash-api-plugin
+ * Domain Path: /languages
  */
 
 
-if ( ! defined( 'ABSPATH' ) ) {
-	die( __('Direct access not allowed.', 'akash-api-plugin') );
+if (! defined('ABSPATH')) {
+	die(__('Direct access not allowed.', 'akash-api-plugin'));
 }
 
+// Define plugin directory
+define('AKASH_API_PLUGIN_DIR', __DIR__);
+
+
+// Load Composer Autoloader
+require_once AKASH_API_PLUGIN_DIR . '/vendor/autoload.php';
+
+use Akash\ApiPlugin\Core\AkashApiPlugin;
+
+add_action('plugins_loaded', 'initiate_plugin');
+
+function initiate_plugin()
+{
+	new AkashApiPlugin();
+}
