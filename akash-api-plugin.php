@@ -30,6 +30,15 @@ use Akash\ApiPlugin\Core\AkashApiPlugin;
 
 add_action('plugins_loaded', 'initiate_plugin');
 
+/**
+ * Initialize the Akash API Plugin.
+ * 
+ * This function is hooked to 'plugins_loaded' action and creates
+ * a new instance of the main plugin class.
+ * 
+ * @since 1.0.0
+ * @return void
+ */
 function initiate_plugin()
 {
 	new AkashApiPlugin();

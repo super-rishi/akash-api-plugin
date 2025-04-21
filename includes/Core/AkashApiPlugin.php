@@ -7,8 +7,24 @@ use Akash\ApiPlugin\Ajax\AkashApiPluginAjaxEndpoint;
 use Akash\ApiPlugin\Blocks\AkashApiPluginTableBlock;
 use Akash\ApiPlugin\Cli\AkashApiPluginCliCommand;
 
+/**
+ * Main plugin class responsible for initializing the plugin.
+ *
+ * This class serves as the entry point for the Akash API Plugin.
+ * It initializes all necessary components and defines plugin constants.
+ *
+ * @since 1.0.0
+ */
 class AkashApiPlugin
 {
+    /**
+     * Constructor for the AkashApiPlugin class.
+     *
+     * Initializes plugin constants and instantiates required classes
+     * for admin pages, AJAX endpoints, blocks, and CLI commands.
+     *
+     * @since 1.0.0
+     */
     public function __construct()
     {
         // Create Plugin Constants
@@ -23,6 +39,17 @@ class AkashApiPlugin
         new AkashApiPluginCliCommand();
     }
 
+    /**
+     * Defines plugin constants.
+     *
+     * Sets up various constants used throughout the plugin including
+     * version, name, text domain, nonce strings, transient names,
+     * and API endpoint URL.
+     *
+     * @since 1.0.0
+     * @access private
+     * @return void
+     */
     private function plugin_constants()
     {
 

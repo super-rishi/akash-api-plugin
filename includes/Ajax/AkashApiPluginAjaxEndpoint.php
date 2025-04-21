@@ -4,19 +4,42 @@ namespace Akash\ApiPlugin\Ajax;
 
 use Akash\ApiPlugin\Api\AkashApiPluginApiEndpoint;
 
+/**
+ * AkashApiPluginAjaxEndpoint Class
+ *
+ * Handles AJAX requests for the Akash API Plugin, specifically for rendering table data.
+ * This class registers AJAX endpoints and processes incoming requests to display API data in tabular format.
+ *
+ * @package AkashApiPlugin
+ * @subpackage Ajax
+ */
 class AkashApiPluginAjaxEndpoint
 {
+    /**
+     * Constructor for the AkashApiPluginAjaxEndpoint class.
+     *
+     * Registers AJAX actions for both logged-in and non-logged-in users
+     * to handle table data rendering requests.
+     */
     public function __construct()
     {
         add_action('wp_ajax_akash_api_plugin_table_data_ajax', [$this, 'ajax_render_table_data']);
         add_action('wp_ajax_nopriv_akash_api_plugin_table_data_ajax', [$this, 'ajax_render_table_data']);
     }
 
+    /**
+     * AJAX callback to render table data.
+     *
+     * Processes AJAX requests for table data, verifies the nonce for security,
+     * fetches data from the API endpoint, and returns the rendered HTML table.
+     *
+     * @return void Sends JSON response and terminates execution
+     */
     public function ajax_render_table_data()
     {
         check_ajax_referer(AKASH_API_PLUGIN_TABLE_BLOCK_NONCE, 'security');
 
-        $ApiData = new AkashApiPluginApiEndpoint(true);
+        $ApiData = new AkashApiPluginApiEndpoint();
 
         unset($_GET['action']);
         unset($_GET['security']);
@@ -30,6 +53,17 @@ class AkashApiPluginAjaxEndpoint
         wp_die();
     }
 
+    /**
+     * Renders HTML table from API data.
+     *
+     * Generates an HTML table structure based on the provided API data and column visibility settings.
+     * Handles data formatting and escaping for secure output.
+     *
+     * @param array $table_data  The API data containing headers, rows, and title
+     * @param array $showColumns Configuration array indicating which columns should be displayed
+     * 
+     * @return string HTML markup for the table or a message if no data is available
+     */
     private function render_table_html($table_data, $showColumns)
     {
         // Get table data

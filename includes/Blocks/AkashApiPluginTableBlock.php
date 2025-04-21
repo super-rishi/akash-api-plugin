@@ -2,8 +2,26 @@
 
 namespace Akash\ApiPlugin\Blocks;
 
+/**
+ * AkashApiPluginTableBlock Class
+ *
+ * Handles the registration, rendering, and AJAX functionality for the table block
+ * in the WordPress block editor (Gutenberg).
+ *
+ * @package AkashApiPlugin
+ * @subpackage Blocks
+ * @since 1.0.0
+ */
 class AkashApiPluginTableBlock
 {
+    /**
+     * Constructor for the AkashApiPluginTableBlock class.
+     *
+     * Registers all necessary WordPress hooks for the table block functionality,
+     * including block registration, asset enqueuing, and AJAX handlers.
+     *
+     * @since 1.0.0
+     */
     public function __construct()
     {
         add_action('init', [$this, 'table_block_register']);
@@ -13,6 +31,14 @@ class AkashApiPluginTableBlock
         add_action('wp_ajax_nopriv_akash_api_plugin_get_table_data', [$this, 'ajax_render_table_block']);
     }
 
+    /**
+     * Registers the table block with WordPress.
+     *
+     * Defines the block type with its associated assets and render callback.
+     *
+     * @since 1.0.0
+     * @return void
+     */
     public function table_block_register()
     {
         register_block_type(__DIR__ . '/table-block', [
@@ -24,6 +50,15 @@ class AkashApiPluginTableBlock
         ]);
     }
 
+    /**
+     * Enqueues frontend assets for the table block.
+     *
+     * Registers and enqueues CSS and JavaScript files needed for the frontend
+     * display of the table block. Also localizes the script with necessary data.
+     *
+     * @since 1.0.0
+     * @return void
+     */
     public function enqueue_frontend_assets()
     {
         wp_register_style(
@@ -51,6 +86,15 @@ class AkashApiPluginTableBlock
         ]);
     }
 
+    /**
+     * Enqueues editor assets for the table block.
+     *
+     * Registers and enqueues JavaScript files needed for the block editor
+     * functionality. Also localizes the script with necessary data for the editor.
+     *
+     * @since 1.0.0
+     * @return void
+     */
     public function enqueue_editor_assets()
     {
         wp_register_script(
@@ -76,7 +120,16 @@ class AkashApiPluginTableBlock
         ]);
     }
 
-    // Render callback for server-side rendering of block content
+    /**
+     * Render callback for server-side rendering of the table block content.
+     *
+     * Processes block attributes and includes the template file for rendering
+     * the table block HTML.
+     *
+     * @since 1.0.0
+     * @param mixed $attributes Block attributes either as an array or object.
+     * @return string The rendered HTML for the table block.
+     */
     public function render_table_block($attributes)
     {
         if (is_array($attributes)) {
@@ -94,6 +147,15 @@ class AkashApiPluginTableBlock
         return ob_get_clean();
     }
 
+    /**
+     * AJAX handler for rendering the table block.
+     *
+     * Processes AJAX requests to render the table block dynamically.
+     * Verifies the nonce for security and returns the rendered HTML.
+     *
+     * @since 1.0.0
+     * @return void Sends a JSON response and exits.
+     */
     public function ajax_render_table_block()
     {
         check_ajax_referer(AKASH_API_PLUGIN_TABLE_BLOCK_NONCE, 'security');

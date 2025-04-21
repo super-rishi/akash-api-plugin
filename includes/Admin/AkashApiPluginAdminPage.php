@@ -4,14 +4,40 @@ namespace Akash\ApiPlugin\Admin;
 
 use Akash\ApiPlugin\Api\AkashApiPluginApiEndpoint;
 
+/**
+ * Admin Page Handler for Akash API Plugin
+ *
+ * This class is responsible for creating and rendering the admin page
+ * for the Akash API Plugin. It handles the admin menu registration,
+ * script/style enqueuing, and data display functionality.
+ *
+ * @since 1.0.0
+ */
 class AkashApiPluginAdminPage
 {
+    /**
+     * Constructor for the AkashApiPluginAdminPage class.
+     *
+     * Registers WordPress hooks for creating the admin page and
+     * enqueuing necessary scripts and styles.
+     *
+     * @since 1.0.0
+     */
     public function __construct()
     {
         add_action('admin_menu', [$this, 'create_admin_page']);
         add_action('admin_enqueue_scripts', [$this, 'enqueue_admin_scripts']);
     }
 
+    /**
+     * Enqueues admin scripts and styles for the plugin page.
+     *
+     * Loads CSS and JavaScript files only on the plugin's admin page
+     * to avoid unnecessary loading on other admin pages.
+     *
+     * @since 1.0.0
+     * @param string $hook The current admin page hook.
+     */
     public function enqueue_admin_scripts($hook)
     {
         if ($hook === 'toplevel_page_akash-api-plugin') {
@@ -20,6 +46,14 @@ class AkashApiPluginAdminPage
         }
     }
 
+    /**
+     * Registers the plugin's admin page in the WordPress admin menu.
+     *
+     * Creates a top-level menu item for the plugin with appropriate
+     * permissions and callback for rendering the page content.
+     *
+     * @since 1.0.0
+     */
     public function create_admin_page()
     {
         add_menu_page(
@@ -33,6 +67,14 @@ class AkashApiPluginAdminPage
         );
     }
 
+    /**
+     * Renders the admin page HTML content.
+     *
+     * Displays the main plugin interface including tabs, refresh button,
+     * and data table. Handles the data refresh functionality when requested.
+     *
+     * @since 1.0.0
+     */
     public function render_admin_page()
     {
 ?>
@@ -57,7 +99,7 @@ class AkashApiPluginAdminPage
                     echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Data has been refreshed.', AKASH_API_PLUGIN_TEXT_DOMAIN) . '</p></div>';
                 }
 
-                $ApiData = new AkashApiPluginApiEndpoint(true);;
+                $ApiData = new AkashApiPluginApiEndpoint();
 
                 echo '<div class="akash-api-table-container">';
                 echo $this->render_table_html($ApiData->data);
@@ -67,6 +109,17 @@ class AkashApiPluginAdminPage
         </div>
 <?php
     }
+
+    /**
+     * Generates HTML for displaying the API data in a table format.
+     *
+     * Takes the API data and formats it into an HTML table with proper
+     * escaping for security. Handles empty data cases gracefully.
+     *
+     * @since 1.0.0
+     * @param array $table_data The API data to be displayed in the table.
+     * @return string HTML markup for the data table or a message if no data is available.
+     */
     private function render_table_html($table_data)
     {
         // Get table data
