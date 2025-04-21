@@ -1,6 +1,40 @@
-.table-block {
-    background: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    color: red;
+.akash-api-plugin-table-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: Arial, sans-serif;
+    font-size: 21px;
+}
+
+.akash-api-plugin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.akash-api-plugin-table th,
+.akash-api-plugin-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+}
+
+.akash-api-plugin-table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.akash-api-plugin-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.akash-api-plugin-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.akash-api-plugin-table caption {
+    caption-side: top;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
 }

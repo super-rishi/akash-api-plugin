@@ -3,11 +3,8 @@
 namespace Akash\ApiPlugin\Core;
 
 use Akash\ApiPlugin\Admin\AkashApiPluginAdminPage;
-use Akash\ApiPlugin\Ajax\AkashApiPluginDataEndpoint;
-use Akash\ApiPlugin\Api\AkashApiPluginDataFetch;
+use Akash\ApiPlugin\Ajax\AkashApiPluginAjaxEndpoint;
 use Akash\ApiPlugin\Blocks\AkashApiPluginTableBlock;
-use Akash\ApiPlugin\Core\AkashApiPluginActivator;
-use Akash\ApiPlugin\Core\AkashApiPluginDeactivator;
 use Akash\ApiPlugin\Cli\AkashApiPluginRefreshCommand;
 
 class AkashApiPlugin
@@ -17,14 +14,12 @@ class AkashApiPlugin
         // Create Plugin Constants
         $this->plugin_constants();
 
+        // Register CLI Command
+
         // Do initialization stuff
-        new AkashApiPluginActivator();
-        new AkashApiPluginDeactivator();
         new AkashApiPluginAdminPage();
-        new AkashApiPluginDataFetch();
-        new AkashApiPluginDataEndpoint();
+        new AkashApiPluginAjaxEndpoint();
         new AkashApiPluginTableBlock();
-        new AkashApiPluginRefreshCommand();
     }
 
     private function plugin_constants()
@@ -43,5 +38,11 @@ class AkashApiPlugin
         define('AKASH_API_PLUGIN_TABLE_BLOCK_NONCE', 'akash_api_plugin_table_block_nonce');
         define('AKASH_API_PLUGIN_TABLE_DATA_NONCE', 'akash_api_plugin_table_data_nonce');
         define('AKASH_API_PLUGIN_API_DATA_NONCE', 'akash_api_plugin_api_data_nonce');
+
+        // Define transient names
+        define('AKASH_API_PLUGIN_API_DATA_TRANSIENT', 'akash_api_plugin_api_data');
+
+        // Define API endpoint
+        define('AWESOME_MOTIVE_API_URL', 'https://miusage.com/v1/challenge/1/');
     }
 }

@@ -19,10 +19,22 @@
     "attributes": {
         "content": {
             "type": "string",
-            "default": "Loading Table Data..."
+            "default": "Loading Table..."
+        },
+        "uniqueId": {
+            "type": "string",
+            "default": ""
         },
         "previewImage": "",
-        "showName": {
+        "showId": {
+            "type": "boolean",
+            "default": true
+        },
+        "showFirstName": {
+            "type": "boolean",
+            "default": true
+        },
+        "showLastName": {
             "type": "boolean",
             "default": true
         },
@@ -30,7 +42,7 @@
             "type": "boolean",
             "default": true
         },
-        "showPhone": {
+        "showDate": {
             "type": "boolean",
             "default": true
         }
