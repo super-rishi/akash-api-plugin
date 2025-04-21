@@ -5,7 +5,7 @@ namespace Akash\ApiPlugin\Core;
 use Akash\ApiPlugin\Admin\AkashApiPluginAdminPage;
 use Akash\ApiPlugin\Ajax\AkashApiPluginAjaxEndpoint;
 use Akash\ApiPlugin\Blocks\AkashApiPluginTableBlock;
-use Akash\ApiPlugin\Cli\AkashApiPluginRefreshCommand;
+use Akash\ApiPlugin\Cli\AkashApiPluginCliCommand;
 
 class AkashApiPlugin
 {
@@ -14,12 +14,13 @@ class AkashApiPlugin
         // Create Plugin Constants
         $this->plugin_constants();
 
-        // Register CLI Command
-
         // Do initialization stuff
         new AkashApiPluginAdminPage();
         new AkashApiPluginAjaxEndpoint();
         new AkashApiPluginTableBlock();
+
+        // Register CLI Command(s)
+        new AkashApiPluginCliCommand();
     }
 
     private function plugin_constants()
