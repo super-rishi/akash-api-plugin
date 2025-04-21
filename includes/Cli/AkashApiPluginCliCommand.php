@@ -11,7 +11,7 @@ class AkashApiPluginCliCommand
     {
         // Register CLI Command
         if (defined('WP_CLI') && WP_CLI) {
-            WP_CLI::add_command('akash-api-plugin', array($this, 'refresh_data'));
+            WP_CLI::add_command('akash-api-plugin', [$this, 'refresh_data']);
         }
     }
     /**

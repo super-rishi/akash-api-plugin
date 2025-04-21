@@ -6,9 +6,6 @@ function akash_api_plugin_fetch_table_data(attributes) {
     const loadingText = parent.querySelector('.akash-api-plugin-table-container .loading-text');
     const tableContainer = parent.querySelector('.akash-api-plugin-table-container .akash-api-plugin-table-content');
 
-    if (loadingText) {
-        loadingText.style.display = 'none';
-    }
 
     if (tableContainer) {
         jQuery.ajax({
@@ -23,6 +20,8 @@ function akash_api_plugin_fetch_table_data(attributes) {
             method: 'GET',
             dataType: 'json',
             success: function (response) {
+                if (loadingText) loadingText.style.display = 'none';
+
                 if (response.success) {
                     tableContainer.innerHTML = response.data.html;
                 } else {
@@ -30,6 +29,7 @@ function akash_api_plugin_fetch_table_data(attributes) {
                 }
             },
             error: function () {
+                if (loadingText) loadingText.style.display = 'none';
                 tableContainer.innerHTML = akashApiPluginTableData.errorText;
             }
         });
