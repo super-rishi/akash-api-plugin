@@ -62,7 +62,7 @@ class AkashApiPluginAdminPage
             'manage_options',
             'akash-api-plugin',
             [$this, 'render_admin_page'],
-            'dashicons-chart-bar',
+            'dashicons-editor-table',
             26
         );
     }
