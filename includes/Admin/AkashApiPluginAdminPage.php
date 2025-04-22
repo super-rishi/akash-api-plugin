@@ -57,8 +57,8 @@ class AkashApiPluginAdminPage
     public function create_admin_page()
     {
         add_menu_page(
-            'Akash API Plugin',
-            'Akash API Plugin',
+            __('Akash API Plugin', AKASH_API_PLUGIN_TEXT_DOMAIN),
+            __('Akash API Plugin', AKASH_API_PLUGIN_TEXT_DOMAIN),
             'manage_options',
             'akash-api-plugin',
             [$this, 'render_admin_page'],
